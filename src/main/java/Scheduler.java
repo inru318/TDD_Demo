@@ -19,6 +19,7 @@ public class Scheduler {
     public int calCostTime() {
         int nowIndex = 0;
         int roadIndex = 0;
+        // straightLine
         while(true) {
             if(tasks.get(nowIndex).getDependencies() != null) {
                 int totalTime = tasks.get(nowIndex).getTime();
@@ -30,6 +31,8 @@ public class Scheduler {
                 break;
             }
         }
+
+        // Single Task
         for (Task task : tasks) {
             if(task.getDependencies() == null) {
                 roads.add(task.getTime());
