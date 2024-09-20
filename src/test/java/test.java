@@ -1,5 +1,9 @@
 import org.junit.Test;
+
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 
 public class test {
@@ -12,24 +16,23 @@ public class test {
     }
 
     @Test
-    public void singleTaskCase() throws Exception{
-        Task createTask = new Task(1, 5, null);
+    public void singleTaskCase() throws Exception {
+        List<Task> createTasks = new ArrayList<>();
+        createTasks.add(new Task(1, 5, null));
         Scheduler crerateScheduler = new Scheduler();
-        crerateScheduler.addTask(createTask);
+        crerateScheduler.addTask(createTasks);
         assertEquals(5,crerateScheduler.calCostTime());
     }
 
     @Test
-    public void multipleSingleTaskCase() throws Exception{
-        Task createTask1 = new Task(1, 5, null);
-        Task createTask2 = new Task(2, 9, null);
-        Task createTask3 = new Task(3, 7, null);
-        Task createTask4 = new Task(4, 3,null);
+    public void multipleSingleTaskCase() throws Exception {
+        List<Task> createTasks = new ArrayList<>();
+        createTasks.add(new Task(1, 5, null));
+        createTasks.add(new Task(2, 9, null));
+        createTasks.add(new Task(3, 1, null));
+        createTasks.add(new Task(4, 7, null));
         Scheduler crerateScheduler = new Scheduler();
-        crerateScheduler.addTask(createTask1);
-        crerateScheduler.addTask(createTask2);
-        crerateScheduler.addTask(createTask3);
-        crerateScheduler.addTask(createTask4);
+        crerateScheduler.addTask(createTasks);
         assertEquals(9,crerateScheduler.calCostTime());
     }
 }
