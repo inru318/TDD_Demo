@@ -9,13 +9,27 @@ public class Scheduler {
     public Scheduler() {
         this.tasks = new ArrayList<>();
         this.roads = new ArrayList<>();
+        roads.add(0);
     }
 
     public void addTask(List<Task> taskList) {
         tasks.addAll(taskList);
     }
 
-    public int calCostTime(){
+    public int calCostTime() {
+        int nowIndex = 0;
+        int roadIndex = 0;
+        while(true) {
+            if(tasks.get(nowIndex).getDependencies() != null) {
+                int totalTime = tasks.get(nowIndex).getTime();
+                roads.set(roadIndex, roads.get(roadIndex) + totalTime);
+                nowIndex = tasks.get(nowIndex).getDependencies().getFirst() - 1;
+            }
+            else {
+                roads.set(roadIndex, roads.get(roadIndex) + tasks.get(nowIndex).getTime());
+                break;
+            }
+        }
         for (Task task : tasks) {
             if(task.getDependencies() == null) {
                 roads.add(task.getTime());
@@ -23,5 +37,4 @@ public class Scheduler {
         }
         return Collections.max(roads);
     }
-
 }
